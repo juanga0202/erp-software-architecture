@@ -18,13 +18,29 @@ Revisión de la plantilla: 7.0 ES (basada en asciidoc), Enero 2017
 arquitectura arc42, <https://www.arc42.org>. Creada por Dr. Peter
 Hruschka y Dr. Gernot Starke.
 
-# Introducción y Metas {#section-introduction-and-goals}
+# Introducción y Metas 
+## Objetivo
+Desarrollar un sistema ERP que permita gestionar el módulo de compras,
+incluyendo productos y proveedores.
+
+## Requisitos principales
+- Registrar productos
+- Registrar proveedores
+- Asociar productos a proveedores
 
 ## Vista de Requerimientos {#_vista_de_requerimientos}
 
-## Metas de Calidad {#_metas_de_calidad}
+## Metas de Calidad 
+- Usabilidad: el sistema debe ser fácil de usar para el personal de compras.
+- Mantenibilidad: la arquitectura debe permitir cambios futuros.
+- Seguridad: solo usuarios autorizados pueden gestionar información.
 
-## Partes interesadas (Stakeholders) {#_partes_interesadas_stakeholders}
+## Partes interesadas (Stakeholders) 
+| Rol | Contacto | Expectativas |
+|---|---|---|
+| Administrador de Compras | Interno | Gestionar productos y proveedores |
+| Gerencia | Interno | Obtener información confiable |
+| Equipo de Desarrollo | Interno | Sistema claro y mantenible |
 
 +-------------+---------------------------+---------------------------+
 | Rol/Nombre  | Contacto                  | Expectativas              |
@@ -36,17 +52,31 @@ Hruschka y Dr. Gernot Starke.
 | \<Role-2\>* |                           |                           |
 +-------------+---------------------------+---------------------------+
 
-# Restricciones de la Arquitectura {#section-architecture-constraints}
+# Restricciones de la Arquitectura 
+| Rol | Contacto | Expectativas |
+|---|---|---|
+| Administrador de Compras | Interno | Gestionar productos y proveedores |
+| Gerencia | Interno | Obtener información confiable |
+| Equipo de Desarrollo | Interno | Sistema claro y mantenible |
 
-# Alcance y Contexto del Sistema {#section-context-and-scope}
+# Alcance y Contexto del Sistema 
 
-## Contexto de Negocio {#_contexto_de_negocio}
+## Contexto de Negocio 
+El sistema ERP interactúa con el Administrador de Compras, quien registra
+productos y proveedores, y con un sistema contable externo para el
+intercambio de información financiera.
 
+![Diagrama de Contexto](./images/c1_context.png)
 **\<Diagrama o Tabla\>**
 
 **\<optionally: Explanation of external domain interfaces\>**
 
-## Contexto Técnico {#_contexto_técnico}
+## Contexto Técnico 
+El sistema ERP se comunica mediante una aplicación web con una API REST,
+la cual accede a una base de datos relacional para el almacenamiento de la
+información.
+
+![Diagrama de Contenedores](./images/c2_containers.png)
 
 **\<Diagrama o Tabla\>**
 
@@ -54,11 +84,15 @@ Hruschka y Dr. Gernot Starke.
 
 **\<Mapeo de Entrada/Salida a canales\>**
 
-# Estrategia de solución {#section-solution-strategy}
+# Estrategia de solución 
+Se propone una arquitectura monolítica con una aplicación web que consume
+una API REST centralizada. Esta estrategia permite simplicidad,
+mantenimiento y facilidad de despliegue para un sistema académico.
 
-# Vista de Bloques {#section-building-block-view}
+# Vista de Bloques 
 
-## Sistema General de Caja Blanca {#_sistema_general_de_caja_blanca}
+## Sistema General de Caja Blanca 
+![Diagrama de Contenedores](./images/c2_containers.png)
 
 ***\<Diagrama general\>***
 
@@ -68,8 +102,9 @@ Motivación
 
 Bloques de construcción contenidos
 
-:   *\<Desripción de los bloques de construcción contenidos (Cajas
-    negras)\>*
+- SPA Web: interfaz gráfica para el usuario.
+- API ERP: lógica de negocio del sistema.
+- Base de Datos: almacenamiento de productos y proveedores.
 
 Interfases importantes
 
@@ -133,15 +168,17 @@ Interfases importantes
 
 *\<plantilla de caja blanca\>*
 
-# Vista de Ejecución {#section-runtime-view}
+# Vista de Ejecución 
 
 ## \<Escenario de ejecución 1\> {#_escenario_de_ejecución_1}
 
--   *\<Inserte un diagrama de ejecución o la descripción del
-    escenario\>*
+Este escenario describe el flujo cuando un administrador registra un
+nuevo producto en el sistema.
 
--   *\<Inserte la descripción de aspectos notables de las interacciones
-    entre los bloques de construcción mostrados en este diagrama.\>*
+![Diagrama de Secuencia](./images/sequence_registrar_producto.png)
+
+El usuario envía el formulario desde la aplicación web, la API valida los
+datos y los almacena en la base de datos.
 
 ## \<Escenario de ejecución 2\> {#_escenario_de_ejecución_2}
 
@@ -149,7 +186,9 @@ Interfases importantes
 
 ## \<Escenario de ejecución n\> {#_escenario_de_ejecución_n}
 
-# Vista de Despliegue {#section-deployment-view}
+# Vista de Despliegue 
+El sistema se desplegará en un servidor web que aloja la aplicación web,
+la API y la base de datos en el mismo entorno.
 
 ## Nivel de infraestructura 1 {#_nivel_de_infraestructura_1}
 
@@ -199,7 +238,9 @@ Características de Calidad/Rendimiento
 
 *\<explicación\>*
 
-# Decisiones de Diseño {#section-design-decisions}
+# Decisiones de Diseño 
+Se eligió una arquitectura monolítica para reducir la complejidad del
+sistema y facilitar su comprensión en un entorno académico.
 
 # Requerimientos de Calidad {#section-quality-scenarios}
 
@@ -209,7 +250,13 @@ Características de Calidad/Rendimiento
 
 # Riesgos y deuda técnica {#section-technical-risks}
 
-# Glosario {#section-glossary}
+# Glosario 
+| Término | Definición |
+|---|---|
+| ERP | Sistema de planificación de recursos empresariales |
+| Producto | Bien adquirido por la empresa |
+| Proveedor | Entidad que suministra productos |
+| API | Interfaz de programación de aplicaciones |
 
 +----------------------+-----------------------------------------------+
 | Término              | Definición                                    |
